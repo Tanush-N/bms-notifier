@@ -18,15 +18,16 @@ def check_bms():
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         page.goto(EVENT_URL)
-        
-        # We wait for the "Book" button or look for the "Coming Soon" text
+
+        # Better logic for World Cup matches
         content = page.content()
         
-        if "Book" in content and "Coming Soon" not in content:
-            send_telegram(f"🚨 TICKETS LIVE! Go to: {EVENT_URL}")
-            print("Status: Tickets Available!")
+        # If 'Coming Soon' is GONE, it usually means the 'Book Now' button appeared
+        if "Coming Soon" not in content:
+            send_telegram(f"🚨 TICKETS MIGHT BE LIVE!\nLink: {EVENT_URL}")
+            print("Status: Tickets Found or 'Coming Soon' removed!")
         else:
-            print("Status: Still waiting...")
+            print("Status: Still showing 'Coming Soon'...")
             
         browser.close()
 
