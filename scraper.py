@@ -50,8 +50,8 @@ def check_bms():
                 content = page.content()
 
                 # TEST MODE: Trigger if 'ICC' is found (which it is)
-                if "ICC" in content:
-                    send_telegram(f"✅ TEST SUCCESS: {event['name']} check is working!")
+                # if "ICC" in content:
+                #     send_telegram(f"✅ TEST SUCCESS: {event['name']} check is working!")
                 
                 # Logic: If 'Coming Soon' is missing but the page is definitely a WC page
                 if "Coming Soon" not in content:
